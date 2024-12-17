@@ -13,7 +13,8 @@ var id_token = ss1.getRange('I2').getValue();
 // var id_folder = "1Y5wI_fa_cCnTFEt_SFrbRP0p2rD9WrzJ"
 // var icon = SpreadsheetApp.getActive().getSheetByName('setting').getRange('H2').getValue(); //icon Favicon
 // Logger.log(icon)
-
+const response = await fetch('https://script.google.com/macros/s/AKfycbxg5KMgfLqE3zzlpLiDYmh9ajdtMJdxNMbH1yY8S6jLvdgw2zEbpHRoCfsRNwZBp7bUxw/exec');
+    const users = await response.json();
 
 function doGet() {
   var counter = getCounter();

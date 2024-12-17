@@ -1,0 +1,323 @@
+<!-- Modal -->
+<div class="modal fade " id="modal_formlogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
+    <!-- <div class="modal-content " style="background: transparent;backdrop-filter: blur(15px);"> -->
+    <div class="modal-content  ">
+      <!-- <div class="modal-content " style="width: 360px;"> -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel11"><i class="fa-solid fa-key fa-lg"></i> ลงชื่อเข้าใช้</h5>
+      </div>
+      <div class="modal-body ">
+
+        <section id="mainform2" style="display:block;">
+          <div class=" rt-container  ">
+            <div class="col-rt-12 ">
+              <div class="Scriptcontent ">
+                <!-- Student Profile -->
+                <div class="student-profile py-4">
+                  <div class="container">
+                    <div class="row">
+
+                      <div class="col-lg-12">
+                        <div class="card shadow-sm">
+                          <div class="card-header bg-transparent text-center">
+                            <img class="profile_img" id="imguser" src="https://cdn.iconscout.com/icon/free/png-256/free-laptop-user-1-1179329.png?f=webp" alt="student dp">
+                            <h4 id="stdName">กรุณาลงชื่อเข้าใช้งาน</h4>
+                          </div>
+                          <div class="card-body">
+                            <div id="logout1" class="input-group mb-3 ">
+                              <span class="input-group-text bg-"style="width:150px;" id="basic-addon1">ชื่อผู้ใช้ :</span>
+                              <input  type="text" class="form-control" id="user" maxlength="10"   >
+                            </div>
+                            <div id="logout2" class="input-group mb-3  ">
+                              <span class="input-group-text bg-" style="width:150px;" id="basic-addon2">รหัสผ่าน 10 หลัก :</span>
+                              <input  type="password" class="form-control" id="pass" maxlength="10"   >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- partial -->
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div id="logout3" class="modal-footer text-center">
+
+        <!-- <button type="button" class="btn btn-secondary col-md-2"id="btn_modal_close" data-bs-dismiss="modal">ปิด</button> -->
+        <!-- <button type="submit" id="registerbtn_logsch2"   class="button-71 btn btn-warning mb-3 col-md-3 text-center  "> ลงทะเบียน</button> -->
+        <button type="submit" id="registerbtn_logsch3"   class="button-71 btn btn-warning  col-md-3 text-center  "> ลืมรหัสผ่าน</button>
+        <button type="submit" id="registerbtn_logsch" value="Login" onclick="login()" class="button-71 btn btn-primary col-md-3 text-center  "> ตกลง</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function loginShow() {
+$('#modal_formlogin').modal('show');
+$('#stdName').css('font-weight', 'bold').addClass('red-text').html('กรุณาลงชื่อเข้าใช้');
+}
+</script>
+
+<script>
+  window.addEventListener('load',function(){
+document.getElementById("counterNum").click();
+settingall()
+ftload()
+
+userName = sessionStorage.getItem('userName');
+// userName = sessionStorage.getItem('userName');
+// let fullname =document.getElementById('fullname');
+user = $('#user').val()  
+
+
+ if(userName === null || userName ===""){
+
+      $('#sch_111').show();
+      $('#adminset1').show();
+      $('#setline1').hide();
+      $('#setline2').hide();
+      $('#setline3').hide();
+      $('#pcontent').hide();
+      $('#btn_editpro').hide();
+     
+
+
+ }else{
+      $('#offline1').hide();
+      $('#adminset1').hide();
+      $('#adminset2').show();
+      $('#online1').show();
+      $('#setline1').hide();
+      $('#setline2').show();
+      $('#setline3').show();
+      $('#pcontent').show();
+      // $('#btn_addpro').show();
+      $('#btn_editpro').hide();
+      $('#registerbtn_logsch2').hide();
+      $('#sch_111').hide();
+      $('#online2').show();
+
+ }
+   setTimeout(() => {
+    ftload();
+  
+
+  }, 1000);
+})
+
+
+
+function ftload() {
+  var ftx = document.getElementById('myF').innerHTML;
+  document.getElementById('wr').innerHTML = ftx;
+}
+
+
+
+  function login(){
+        event.preventDefault()
+        showSpinner()
+        // serachID()
+            if ($('#user').val() == "") {
+              Swal.fire('ใส่ชื่อผู้ใช้งาน!!');
+                hideSpinner()
+                 return;
+            }
+            if ($('#pass').val() == "") {
+              Swal.fire('ใส่รหัสผ่าน!!');
+                hideSpinner()
+                 return;
+            }
+       
+        var pass = document.querySelector('#pass').value
+        var user =document.querySelector('#user').value
+
+     google.script.run.withSuccessHandler(function(output){
+        sessionStorage.setItem('userName',output);
+        
+      if(output !== null){
+       admin = output;
+      //  console.log(admin)
+       getData();
+
+      if (output[6].length <= 0) {
+                  Swal.fire('รอการอนุมัติ!!');
+                    hideSpinner()
+                    sessionStorage.removeItem('userName');
+                    return;
+
+                }
+                else{
+      $('#modal_formlogin').modal('hide')
+      $('#offline1').hide();
+      $('#adminset1').hide();
+      $('#adminset2').show();
+      $('#online1').show();
+      $('#online2').show();
+      // $('#setline1').show();
+      $('#setline2').show();
+      $('#setline3').show();
+      $('#pcontent').show();
+      // $('#btn_addpro').show();
+      // $('#btn_editpro').show();
+      $('#registerbtn_logsch2').hide();
+      $('#sch_111').hide();
+      $('#logo_pic44').attr('src', output[5]);
+      $('#sch_n1').html(output[3]);   
+                }
+      
+  
+      }else{
+      //  document.querySelector('#loading').style.display="none"
+      //  alert('รหัสผ่านไม่ถูกต้อง')
+                  Swal.fire({
+                  position: 'center',
+                  icon: 'warning',
+                  title: 'รหัสผ่านไม่ถูกต้อง!!',
+                  // text: 'วิชาภาษาไทย',
+                  showConfirmButton: true,
+                  // timer: 1500
+                })
+       sessionStorage.removeItem('userName');
+       }
+       hideSpinner()
+      }).loginform(user,pass)
+
+  }
+
+
+// ***************************************************************************
+let admin ="";
+function getData(){
+  //  console.log(admin)
+    if(admin == "null" || admin == ""){
+      admin = ""
+      // $("#btnlogin").show();
+      // $(".logout").hide();
+      // $(".fablogin").show();
+      // $(".fablogout").hide();
+      // $("#msg-name").html(admin);
+  }else{
+      // $("#btnlogin").hide();
+      // $(".logout").show();
+      // $("#msg-name").html(admin);
+      // $(".fablogin").hide();
+      // $(".fablogout").show();
+  }
+}  
+
+  let data
+window.addEventListener('load',function(){
+ data = sessionStorage.getItem('userName');
+ console.log('userName: ',data)
+ if(data === null || data ===""){
+       getData()         
+ }else{
+       admin = data;
+       getData(admin)
+ }
+})
+// *************************************************************************************
+  function reLoad_Page() {
+    event.preventDefault()
+    sessionStorage.removeItem('userName');
+    $('#modal_formlogin').modal('show')
+    $('#stdName').css('font-weight', 'bold').addClass('red-text').html('คุณออกจากระบบแล้ว');
+    $('#logout2').hide();
+    $('#logout1').hide();
+    $('#logout3').hide();
+    google.script.run.withSuccessHandler(function(url){
+    window.open(url,'_top');
+      })
+      .getURL();
+
+    }
+  function reLoad_Page3() {
+    event.preventDefault()
+    sessionStorage.removeItem('userName');
+    google.script.run.withSuccessHandler(function(url){
+    window.open(url,'_top');
+      })
+      .getURL();
+
+    }
+
+//  setTimeout(function() {
+//   $('#stdName').css('font-weight', 'bold').addClass('red-text').html('คุณออกจากระบบแล้ว');
+// }, 2000);
+
+
+  function reLoad_Page2(){
+    event.preventDefault()
+       google.script.run.withSuccessHandler(function(url){
+        window.open(url,'_top');
+      })
+      .getURL();
+    }
+
+
+
+// ******************************************************************************************
+  function showclass(){
+  //   $('#md_logsch').modal('hide')
+  // document.querySelector('#add_stork_school').value  = $('#user').val();
+  // document.querySelector('#market_pas').value  = $('#user').val();
+  // document.querySelector('#school_name').value  = $('#user').val();
+  // document.querySelector('#school_name').innerHTML = "โรงเรียน"+$('#user').val();
+  // document.querySelector('#add_stork_school').readOnly = true;
+  // document.querySelector('#market_pas').readOnly = true;
+  // document.querySelector('#register_pas').disabled = true;
+
+  }
+
+</script>
+
+<style>
+  .student-profile .card {
+    border-radius: 10px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+    /* width: 300px; */
+  }
+
+  #modal_formlogin {
+    border-radius: 0px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+
+  }
+
+  .student-profile .card .card-header .profile_img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 10px auto;
+    border: 5px solid #ccc;
+    border-radius: 50%;
+  }
+
+  .student-profile .card h4 {
+    font-size: 20px;
+    font-: 700;
+  }
+
+  .student-profile .card p {
+    font-size: 16px;
+    color: #000;
+  }
+
+  .student-profile .table th,
+  .student-profile .table td {
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #000;
+  }
+</style>

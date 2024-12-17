@@ -1,0 +1,85 @@
+<script>
+  function loadingOverlay(){
+        $.LoadingOverlay("show", {
+       image       : "",
+       fontawesomeAnimation:'15000ms',
+       fontawesomeResizeFactor: '1.0',
+       fontawesome : "fa-solid fa-biohazard fa-1x text-info"
+       });
+        $.LoadingOverlay("hide");
+}
+
+
+  $(function(){
+
+    $('#btnadd').click(function(){
+      $('#modelAllow').modal('show');
+      $('#input2').val($('#showname').html());
+
+    })
+    $('#btnadd2').click(function(){
+      $('#model_menu').modal('show');
+    })
+    $('#setline1').click(function(){
+      $('#md_setting').modal('show');
+      settingall()
+    })
+    $('#setline2').click(function(){
+      $('#md_setting2').modal('show');
+      // settingall2()
+    })
+    
+    $('#setline3').click(function(){
+      $('#md_setting_aboutMe_aboutMe').modal('show');
+      // settingall2()
+    })
+
+    $('#btn_addpro').click(function(){
+    $('#md_adpro').modal('show');
+    })
+    
+    $('#registerbtn_logsch2').click(function(){
+    $('#md_regiter').modal('show');
+    })
+
+    $('#registerbtn_logsch3').click(function(){
+    $('#md_pass_mailshow').modal('show');
+    $('#modal_formlogin').modal('hide');
+    })
+
+    $('#btn_editpro').click(function(){
+    $('#md_table').modal('show');
+    })
+
+    $('#click_Calendar').click(function(){
+    $('#md_Calendar').modal('show');
+    })
+
+    $('#adminset3').click(function(){
+    $('#md_dataTable_agree').modal('show');
+    })
+
+    $('#re_1').click(function(){
+    reSetnum()
+    })
+    
+    
+     // $('#btn-regiter').click(function(){
+    // $('#md_regiter').modal('show');
+    // })
+  })
+</script>
+
+<script>
+  function reSetnum() {
+  var cfm = confirm('ต้องการ Reset จำนวนผู้ชม ?');
+  if (cfm) {
+    google.script.run.withSuccessHandler(addSuccess_deleteData).deleteData4() ;
+  }
+}
+  function addSuccess_deleteData(){
+  Swal.fire({ title:'Reset เรียบร้อย'});
+     }
+
+  
+</script>

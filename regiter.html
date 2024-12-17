@@ -1,0 +1,41 @@
+<script>
+  function saveregister(obj){
+  event.preventDefault();
+  showSpinner()
+  
+          if ($('#register_na' && '#register_pas'&& '#register_na2' && '#register_mail').val() == "") {
+            Swal.fire('กรอกข้อมูลไม่ครบ')
+                hideSpinner()
+                 return;
+          }
+          google.script.run.withSuccessHandler(addSuccess_register).save_register(obj);
+}
+
+
+function addSuccess_register() {
+  google.script.run.loginform();
+  // document.getElementById('formregister').reset();
+if (document.getElementById('register_agree').value === "") {
+  Swal.fire('เรียบร้อย..รอการอนุมัติ');
+} else {
+  Swal.fire('การอนุมัติ..เรียบร้อย');
+}
+
+  $('#formregister')[0].reset();
+  $('#md_regiter').modal('hide');
+
+  runtb2();
+  hideSpinner();
+}
+
+
+</script>
+<style>
+  #md_regiter {
+    border-radius: 0px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+
+  }
+</style>

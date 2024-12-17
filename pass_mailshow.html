@@ -1,0 +1,75 @@
+<!-- Modal -->
+<div class="modal fade " id="md_pass_mailshow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content form-box">
+      <div class="modal-header">
+        <h5 class="modal-title text-primary"><img src="https://cdn-icons-png.flaticon.com/512/216/216898.png" width="25px" height="25px" /> ลืมรหัสผ่าน
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formpass_mailshow" onsubmit="savepass_mailshow(this)">
+          <div class="row">
+
+            <div class="input-group mb-3 ">
+              <span class="input-group-text  " style="width:130px;" id="text4"><b>อีเมล์ :</b></span>
+              <input type="email" class="form-control" id="pass_mailshow_1" name="pass_mailshow_1" placeholder="กรอกอีเมล์ ของคุณที่ใช้ลงทะเบียน" >
+            </div>
+
+            <div class="input-group mb-3 ">
+              <span class="input-group-text  " style="width:130px;" id="text3"><b>รหัสผ่านของคุณ :</b></span>
+              <input type="text" class="form-control" id="pass_mailshow_2" name="pass_mailshow_2" placeholder="รหัสผ่านของคุณ" readonly >
+            </div>
+
+            <div class="modal-footer">
+              <button  id="pass_mailshowbtn2" class="button-71 btn btn-warning "> ลงชื่อเข้าใช้</button>
+              <button  id="pass_mailshowbtn1" class="button-71 btn btn-primary "> กู้รหัสผ่าน</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+  $('#pass_mailshowbtn1').click(function(event) {
+    event.preventDefault();
+    var id = $('#pass_mailshow_1').val();
+
+   if ($('#pass_mailshow_1').val() === '') {
+  Swal.fire('กรอกอีเมล์ของคุณที่ใช้ลงทะเบียน');
+  return;
+}
+
+    google.script.run.withSuccessHandler(onSuccess_check3).readId_check3(id);
+    function onSuccess_check3(response) {
+      if (response != null) {
+        $('#pass_mailshow_2').val(response[2]);
+      }
+    }
+  });
+
+    $('#pass_mailshowbtn2').click(function(event) {
+    event.preventDefault();
+    $('#formpass_mailshow')[0].reset();
+
+    $('#md_pass_mailshow').modal('hide');
+    $('#modal_formlogin').modal('show');
+  });
+
+
+});
+</script>
+<style>
+  #md_pass_mailshow {
+    border-radius: 0px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+
+  }
+</style>

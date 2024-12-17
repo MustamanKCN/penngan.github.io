@@ -1,0 +1,153 @@
+<div class="card">
+  <div class="card-body">
+    <table id="dataschool1" class="display responsive " cellspacing="0" style="width:100%;font-size:14px">
+      <thead class="bg-success"></thead>
+    </table>
+  </div>
+</div>
+
+<script>
+  function runtb2(){
+ google.script.run.withSuccessHandler(showdata).getData2();
+  }
+  google.script.run.withSuccessHandler(showdata).getData2();
+  function showdata(item){
+   if(item){
+      var result = "<div>"+
+                   "<table class='table table-sm' style='font-size:14px'>"+
+                   "<thead style='white-space: nowrap' class='bg-info'>"+
+                     "<tr>"+ 
+                       "<th scope='col'>id</th>"+
+                       "<th scope='col'>User</th>"+
+                       "<th scope='col'>Password </th>"+
+                       "<th scope='col'>ชื่อ-สกุล</th>"+
+                       "<th scope='col'>อีเมล์</th>"+
+                       "<th scope='col'>รูปโปรไฟล์ </th>"+
+                       "<th scope='col'>สถานะการอนุมัติ </th>"+
+                       "<th scope='col'>การอนุมัติ</th>"+
+                       "<th scope='col'>ลบ</th>"+
+                     "</tr>"+
+                  "</thead>";
+
+           for(var i=0; i<item.length; i++) {
+            if (item[i][6].length <= 0 ){
+                  item[i][6] = "⛔รอการอนุมัติ";
+                }
+                result += "<tr>";
+                result += '<td>'+ (item[i][0]) + '</td>';   
+                result += '<td>'+ (item[i][1]) + '</td>'; 
+                result += '<td>'+ (item[i][2]) + '</td>'; 
+                result += '<td>'+ (item[i][3]) + '</td>'; 
+                result += '<td>'+ (item[i][4]) + '</td>'; 
+                // result += '<td>'+ (item[i][5]) + '</td>'; 
+
+                result += "<td><img src='" + item[i][5] + "' width='50px' height='50px'></td>";
+
+                result += '<td class="button-71 btn btn-light mt-3 " style="background-color: yellow; color: red; ">' + item[i][6] + '</td>';
+
+                
+
+                result += "<td><a type='button'  onclick='editData2(this);' ><i class='bx bx-message-alt-edit bx-sm' style='color:#a8a5a5'></i></a></a></td>";   
+                result += "<td><a type='button'  onclick='deleteData2(this);'><i class='bx bx-trash bx-sm' style='color:#fcc297'></i></a></td>"; 
+
+                result += "</tr>";
+      }
+                result += "</table></div>";
+                var div = document.getElementById('dataschool1').innerHTML = result;
+                $(document).ready(function() {
+                $('#dataschool1').DataTable({
+
+      destroy: true,    //ซ่อนคอลัม
+        responsive : true,
+        // serverSide : true,
+        pageLength: 5,
+        processing: true,
+        searching: true,
+        //  paging : true,
+        //  info: true,
+// order: [[0, 'desc']],
+order: [[0, 'asc']],
+         //ซ่อนคอลัม * ห้ามซ่อนคอลั้ม 0 จะ Edit อ้างอิงไม่ได้ //
+
+          "columnDefs": [
+            {
+                "targets": [4],
+                "visible": false,
+                "searchable": false,
+            }
+        ],
+
+  dom: 'Bfrtip',
+        buttons: [
+            { extend: "excelHtml5", text: '<i class="fa fa-file-excel"></i> Excel'},
+            { extend: "print", text: '<i class="fas fa-print"></i> พิมพ์' },
+            { extend: "pageLength", text: '<i class="fas fa-eye"></i> แสดงแถว' },
+        ], 
+
+           });
+        });
+    }
+    hideSpinner()
+  }
+
+</script>
+
+
+<!-- /************************** editData ********************* */ -->
+
+<script>
+  function editData2(el){
+    $('#md_regiter').modal('show')
+    $('#btn_agree').show();
+    $('#btn_agree1').hide();
+    // $('#btn_agree2').hide();
+    $('#register_na').prop('readonly', true);
+    $('#register_pas').prop('readonly', true);
+    $('#register_na2').prop('readonly', true);
+    $('#register_mail').prop('readonly', true);
+    // $('#md_table').modal('hide')
+    
+    // document.getElementById("div").style.display="block"
+        var id = el.parentNode.parentNode.cells[0].innerHTML;  
+        console.log(id)
+        google.script.run.withSuccessHandler(onSuccess444).readId2(id);}
+
+function onSuccess444(response){
+          document.getElementById('register_na').value = response[1];
+          document.getElementById('register_pas').value = response[2];
+          document.getElementById('register_na2').value = response[3];
+          document.getElementById('register_mail').value = response[4];
+          document.getElementById('register_agree').value = response[6];
+          // $('#blah4').attr('src', response[2]);
+
+        };
+
+
+/************************** delData ********************* */
+  function deleteData2(el) {
+    var id = el.parentNode.parentNode.cells[0].innerHTML; 
+        Swal.fire({
+        title: 'ลบข้อมูล?',
+        text: "คุณต้องการลบข้อมูล (ไม่สามารถกู้คืนข้อมูลภายหลังได้)!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3d9139',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'ยกเลิก',
+        confirmButtonText: 'ยืนยัน!',
+      }).then((result) => {
+    if (result.isConfirmed) {
+      google.script.run.withSuccessHandler(()=> {
+          Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'ดำเนินการ..เสร็จสมบูรณ์',
+          showConfirmButton: false,
+          timer: 2000
+          })
+          google.script.run.withSuccessHandler(showdata).getData2();
+        }).deleteId2(id);
+      }
+    })  
+}
+</script>

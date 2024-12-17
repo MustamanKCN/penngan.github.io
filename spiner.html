@@ -1,0 +1,41 @@
+<div id="loading-spinner"> </div>
+
+<script>
+  function showSpinner() {
+    var spinner = '<center class="text-warning" ><i class="fa fa-spinner spinner "></i><br/>  รอสักครู่กำลังโหลด...</center>';
+    $('#loading-spinner').html(spinner);
+    $('#loading-spinner').show();
+}
+
+function hideSpinner() {
+    $('#loading-spinner').hide();
+}
+</script>
+
+<style>
+  #loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+
+  }
+
+
+  .spinner {
+    animation: spin 1s infinite linear;
+    font-size: 48px;
+    /* ปรับขนาดตามที่ต้องการ */
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

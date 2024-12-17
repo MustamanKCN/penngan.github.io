@@ -1,0 +1,288 @@
+<!-- Modal -->
+<div class="modal fade" id="md_setting" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  ">
+    <div class="modal-content shadow ">
+      <div class="modal-header">
+        <h5 class="modal-title"><img src="https://cdn-icons-png.flaticon.com/512/216/216898.png" width="25px" height="25px" /> ตั้งค่าระบบ
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formsetting" onsubmit="savesetting(this)">
+          <div class="row">
+
+            <!-- <div class="input-group mb-3 ">
+              <span class="input-group-text text- bg-" style="width:120px;" id="text1"><b>ไอดี token :</b></span>
+              <input type="text" class="form-control" id="set_token" name="set_token" placeholder="ไอดี token" >
+              <div class="input-group mb-12 ">
+                <input type="text" class="form-control" id="set_def0" name="set_def0"readonly>
+              </div>
+            </div> -->
+
+            <div class="input-group mb-3 " style="display:none">
+              <span class="input-group-text text- bg-" style="width:120px;" id="text1"><b>Id file :</b></span>
+              <input type="text" class="form-control" id="set_pi" name="set_pi" placeholder="ไอดี โฟลเดอร์เก็บไฟล์ข้อมูล" >
+              <div class="input-group mb-12 ">
+                <input type="text" class="form-control" id="set_def1" name="set_def1"readonly>
+              </div>
+            </div>
+
+            <div class="input-group mb-3 " style="display:none">
+              <span class="input-group-text text- bg-" style="width:120px;" id="text2"><b>Id pdf :</b></span>
+              <input type="text" class="form-control" id="set_lo" name="set_lo" placeholder="ไอดี โฟลเดอร์เก็บไฟล์PDF " >
+              <div class="input-group mb-12 ">
+                <input type="text" class="form-control" id="set_def2" name="set_def2"readonly>
+              </div>
+            </div>
+
+            <div class="input-group mb-3 ">
+              <span class="input-group-text text- bg-" style="width:120px;" id="text3"><b>Id pic :</b></span>
+              <input type="text" class="form-control" id="set_sch" name="set_sch" placeholder="ไอดี โฟลเดอร์เก็บรูปภาพ" >
+              <div class="input-group mb-12 ">
+                <input type="text" class="form-control" id="set_def3" name="set_def3"readonly>
+              </div>
+            </div>
+
+            <div class="input-group mb-3 ">
+              <span class="input-group-text text- bg-" style="width:120px;" id="text4"><b>ปีการศึกษา :</b></span>
+              <input type="text" class="form-control" id="set_dev" name="set_dev" placeholder="ปีการศึกษา" >
+              <div class="input-group mb-12 ">
+                <input type="text" class="form-control" id="set_def4" name="set_def4"readonly>
+              </div>
+            </div>
+
+            <div class="input-group mb-3 ">
+              <span class="input-group-text text- bg-" style="width:120px;" id=""><b>ผู้พัฒนา :</b></span>
+              <input type="text" class="form-control" name="set_pss1" placeholder="ผู้พัฒนา" >
+              <div class="input-group mb-12 ">
+                <input type="text" class="form-control" id="set_def5" name="set_def5"readonly>
+              </div>
+            </div>
+
+            <div class="input-group mb-3 ">
+              <span class="input-group-text text- bg-" style="width:120px;" id=""><b>โรงเรียน :</b></span>
+              <input type="text" class="form-control" name="set_pss2" placeholder="โรงเรียน" >
+              <div class="input-group mb-12 ">
+                <input type="text" class="form-control" id="set_def6" name="set_def6" readonly>
+              </div>
+            </div>
+
+            <div class="input-group mb-3 ">
+              <span class="input-group-text text- bg-" style="width:120px;" id="text1"><b>สังกัด :</b></span>
+              <input type="text" class="form-control" id="set_obec" name="set_obec" placeholder="สังกัด" >
+              <div class="input-group mb-12 ">
+                <input type="text" class="form-control" id="set_def7" name="set_def7"readonly>
+              </div>
+            </div>
+
+            <div class="input-group mb-3 ">
+              <span class="input-group-text text- bg-warning" style="width:150px;" id=""><b>ตั้งรหัสผ่านใหม่ :</b></span>
+              <input type="text" class="form-control" id="re_2" name="re_2" maxlength="10" placeholder="ตั้งรหัสผ่านใหม่"  >
+              <div class="input-group mb-12 ">
+                <span class="input-group-text text- bg-warning" style="width:150px;" id=""><b>รหัสผ่านปัจจุบัน :</b></span>
+                <input type="text" class="form-control" id="re_3" name="re_3" placeholder="รหัสผ่านปัจจุบัน" readonly >
+              </div>
+
+            </div>
+
+            <div class="input-group mb-3 ">
+              <h6 class="button-71 btn btn-light text-light col-12" style=" background-color:#06635f" id="re_1">
+                <i class="fa-solid fa-users"></i> Reset : จำนวนผู้ชมเว็บไต์
+              </h6>
+            </div>
+
+            <hr>
+
+            <div class="input-group mb-3 ">
+              <span class="input-group-text text- bg-" style="width:120px;" id=""><b>รูปภาพโปรไฟล์ :</b></span>
+              <input id="fileadd_pic" onchange="readURL3(this)"  name="fileadd_pic" type="file" class="form-control" multiple="multiple" accept="image/jpeg, image/png, image/jpg">
+            </div>
+            <center><img id="blah3" src="http://placehold.it/180" alt="your image" width=150px />
+            </center>
+
+            <script>
+              function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#blah3")
+                        .attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+            </script>
+
+
+
+            <!-- <div class="input-group mb-3 ">
+              <span class="input-group-text text- bg-" style="width:120px;" id=""><b>รหัสผ่าน ป.6 :</b></span>
+              <input type="text" class="form-control" name="set_pss6" placeholder="รหัสผ่าน ป.6" >
+            </div>
+
+            <div class="input-group mb-3 ">
+              <span class="input-group-text text- bg-" style="width:120px;" id=""><b>Pass Setting</b></span>
+              <input type="text" class="form-control" name="set_pssall" maxlength="10" placeholder="รหัสผ่านเข้าระบบตั้งค่า" >
+            </div> -->
+
+            <div class="modal-footer">
+              <button type="submit" id="setbtn1" class="button-71 btn btn-danger "><img src="https://cdn-icons-png.flaticon.com/512/3603/3603959.png" width="25px" height="25px" /> ตกลง</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function settingall(){
+      
+  google.script.run.withSuccessHandler(addSuccess_setting2).readDatasetting() ;
+}
+  function addSuccess_setting2(data){
+  try{
+  data = JSON.parse(data)
+  } catch{}   
+
+if (data[1] === ""|| data[4] === ""|| data[5] === ""|| data[6] === ""|| data[7] === ""|| data[8] === "") {
+  Swal.fire({
+    position: 'center',
+    icon: 'info',
+    title: 'ตั้งค่าระบบ..ไม่ถูกต้อง',
+    text: 'ระบบใช้งานได้...ไม่สมบูรณ์',
+    showConfirmButton: true,
+    timer: 5000
+  });
+$('#md_setting').modal('show');
+  
+  setTimeout(() => {
+    settingall()
+  }, 120000);
+}
+
+$('#logo_pic').attr('src', data[7]);
+$('#logo_pic1').attr('src', data[7]);
+$('#logo_pic2').attr('src', data[7]);
+$('#logo_pic33').attr('src', data[7]);
+$('#imguser').attr('src', data[7]);
+// $('#logo_pic2').attr('src', data[2]);
+$('#logo_pic3').attr('src', data[2]);
+$('#logo_pic4').attr('src', data[2]);
+$('#sch_n1').html(data[5]);
+$('#sch_n2').html(data[5]);
+$('#sch_n3').html(data[6]);
+$('#sch_n33').html(data[6]);
+$('#sch_n34').html('ปีการศึกษา'+data[4]);
+$('#sch_n35').html(data[8]);
+$('#sch_n36').html(data[8]);
+$('#sch_n5').html(data[5]);
+$('#sch_n4').html(data[6]);
+$('#sch_n6').html(data[6]);
+$('#sch_id').val(data[6]);
+$('#re_3').val(data[9]);
+
+// ************************ if แบบสั้น **********************************
+$('#set_def7').val((data[8] === "") ? '❌ ไม่่ได้ตั้งค่า' : '✅ ตั้งค่าเรียบร้อย'+' [ '+data[8]+' ]');
+$('#set_def7').css({  'color': 'red',  'font-weight': 'bold'});
+$('#set_def1').val((data[1] === "") ? '❌ ไม่่ได้ตั้งค่า' : '✅ ตั้งค่าเรียบร้อย'+' [ '+data[1]+' ]');
+$('#set_def1').css({  'color': 'red',  'font-weight': 'bold'});
+$('#set_def2').val((data[2] === "") ? '❌ ไม่่ได้ตั้งค่า' : '✅ ตั้งค่าเรียบร้อย'+' [ '+data[2]+' ]');
+$('#set_def2').css({  'color': 'red',  'font-weight': 'bold'});
+$('#set_def3').val((data[3] === "") ? '❌ ไม่่ได้ตั้งค่า' : '✅ ตั้งค่าเรียบร้อย'+' [ '+data[3]+' ]');
+$('#set_def3').css({  'color': 'red',  'font-weight': 'bold'});
+$('#set_def4').val((data[4] === "") ? '❌ ไม่่ได้ตั้งค่า' : '✅ ตั้งค่าเรียบร้อย'+' [ '+data[4]+' ]');
+$('#set_def4').css({  'color': 'red',  'font-weight': 'bold'});
+$('#set_def5').val((data[5] === "") ? '❌ ไม่่ได้ตั้งค่า' : '✅ ตั้งค่าเรียบร้อย'+' [ '+data[5]+' ]');
+$('#set_def5').css({  'color': 'red',  'font-weight': 'bold'});
+$('#set_def6').val((data[6] === "") ? '❌ ไม่่ได้ตั้งค่า' : '✅ ตั้งค่าเรียบร้อย'+' [ '+data[6]+' ]');
+$('#set_def6').css({  'color': 'red',  'font-weight': 'bold'});
+$('#blah3').attr('src', data[7]);
+$('#dev_n1').html(data[4]);
+}
+
+
+  /************************** ตัวแปรกำหนดรหัส Check_Password ********************* */
+  function check_passetlogo(){
+    event.preventDefault();
+
+    let id = 'pssw1'
+    google.script.run.withSuccessHandler(setpassword).readId_pass(id) ;     
+}
+
+
+/************************** แบบที่ 1 ********************* */
+    function setpassword(response){
+    var inputValue = prompt(" กรอกรหัสผ่าน ");
+    if (inputValue === response[9]) {  
+      google.script.run.withSuccessHandler(()=> {
+        })
+          $('#btn_addpro').show();
+          $('#btn_editpro').show();
+          $('#setline1').show();
+          $('#adminset3').show();
+    }
+    else{
+      alert("กรอกรหัสผ่านไม่ถูกต้อง");
+    }
+  }
+
+
+/************************** แบบที่ 2 ********************* */
+  //   async function setpassword(response){
+  //     const { value: passw_set }  
+  //      = await Swal.fire({
+  //       title: 'กรอกรหัสผ่าน',
+  //       confirmButtonText: 'ตกลง',
+  //       confirmButtonColor: 'blue',
+  //       input: 'password',
+  //       // inputLabel: 'กรอกรหัสผ่านเพื่อดำเนินการต่อ',
+  //       inputPlaceholder: 'กรุณากรอกรหัสผ่าน',
+  //       inputAttributes: {
+  //         maxlength: 10,
+  //         autocapitalize: 'off',
+  //         autocorrect: 'off'
+  //       }
+  //     })
+
+  //   if (passw_set=== response[9]) {  
+  //     google.script.run.withSuccessHandler(()=> {
+  //       })
+  //               $('#btn_addpro').show();
+  //               $('#btn_editpro').show();
+  //               $('#setline1').show();
+  //               $('#adminset3').show();
+  //   }
+
+  //   else{
+  //     Swal.fire({ title: 'รหัสผ่านไม่ถูกต้อง',})
+  //   }
+  // }
+
+</script>
+
+
+
+<script>
+  function savesetting(obj) { 
+        event.preventDefault();
+        showSpinner()           
+            google.script.run.withSuccessHandler(addSuccess_setting).saveData4(obj);
+            }
+              function addSuccess_setting(){
+             $('#formsetting')[0].reset();
+             $('#md_setting').modal('hide');
+              Swal.fire('ดำเนินการเรียบร้อย');
+            settingall()
+            hideSpinner()
+        }
+</script>
+<style>
+  #md_setting {
+    border-radius: 0px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+
+  }
+</style>

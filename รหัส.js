@@ -1,3 +1,5 @@
+let githubUser = 'MustamanKCN'
+let repo = 'penngan.github.io'
 var sss3 = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('aboutme')
 var ss1 = SpreadsheetApp.getActive().getSheetByName('setting');
 var ss2 = SpreadsheetApp.getActive().getSheetByName('menu');

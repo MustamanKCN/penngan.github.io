@@ -1,0 +1,34 @@
+<script>
+  function saveadpro(obj){
+  event.preventDefault();
+  showSpinner();
+  var id = document.getElementById('adpro_na').value
+            if ($('#adpro_na' && '#adpro_pas'&& '#adpro_na2' && '#adpro_mail'&& '#profile_add').val() == "") {
+            Swal.fire('กรอกข้อมูลไม่ครบ');
+                hideSpinner();
+                 return;
+            }
+            
+      google.script.run.withSuccessHandler(addSuccess_adpro).save_adpro(obj);
+    
+}
+
+function addSuccess_adpro() {
+  google.script.run.loginform()
+  document.getElementById('formadpro').reset();
+  $('#md_adpro').modal('hide');
+Swal.fire('ดำเนินการเรียบร้อย');
+hideSpinner();
+
+}
+
+</script>
+<style>
+  #md_adpro {
+    border-radius: 0px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+
+  }
+</style>
